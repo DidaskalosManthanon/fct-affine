@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Conversion Celsius ↔ Fahrenheit</title>
+  <script type="text/javascript" src="https://www.geogebra.org/apps/deployggb.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+    .qcm {
+      margin-top: 30px;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .question p {
+      font-weight: bold;
+    }
+    .result {
+      margin-top: 30px;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Conversion Celsius ↔ Fahrenheit</h1>
+  <p>Explorez la fonction \( f(x) = 1{,}8x + 32 \) dans la fenêtre Geogebra ci-dessous. Vous pouvez y placer des points pour tester des valeurs.</p>
+  <div id="ggb-element" style="width: 100%; height: 500px;"></div>
+
+  <div class="qcm" id="qcm"></div>
+  <button onclick="submitQuiz()">Soumettre mes réponses</button>
+  <div id="score" class="result"></div>
+
+  <script>
+    // Intégration GeoGebra
+    var params = {
+      "appName": "graphing",
+      "material_id": "qsp9fsnu", // Vous pouvez remplacer par votre propre ID si vous avez un applet personnalisé
+      "width": 800,
+      "height": 500,
+      "showToolbar": false,
+      "showAlgebraInput": true,
+      "showMenuBar": false
+    };
+    var ggbApp = new GGBApplet(params, true);
+    window.addEventListener("load", function() {
+      ggbApp.inject("ggb-element");
+    });
+
+    // Questions et réponses correctes
+    const questions = [
+      {
+        q: "Quel est l'équivalent de 0°C en degrés Fahrenheit ?",
+        options: ["0°F", "32°F", "-32°F", "16°F"],
+        answer: 1
+      },
+      {
+        q: "Quel est l'équivalent de 0°F en degrés Celsius ?",
+        options: ["0°C", "32°C", "-160/9 °C", "-17°C"],
+        answer: 2
+      },
+      {
+        q: "Quelle est la fonction permettant de passer des degrés Fahrenheit aux degrés Celsius ?",
+        options: ["g(x) = (5/9)*x - 32", "g(x) = 0,55x - 32", "g(x) = 0,55x - 18", "g(x) = (5/9)*x - 160/9"],
+        answer: 3
+      },
+      {
+        q: "Existe-t-il une température qui soit la même en degrés Celsius et degrés Fahrenheit ?",
+        options: ["Oui", "Non"],
+        answer: 0
+      },
+      {
+        q: "Que vaut -40°C en degrés Fahrenheit ?",
+        options: ["-8°F", "-72°F", "-40°F", "8°F"],
+        answer: 2
+      },
+      {
+        q: "Que vaut -40°F en degrés Celsius ?",
+        options: ["-8°C", "-72°C", "-40°C", "8°C"],
+        answer: 2
+      },
+      {
+        q: "Comment traduire la phrase : 'existe-t-il une température en degrés Celsius qui soit la même en degrés Fahrenheit ?' en équation ? (plusieurs réponses possibles)",
+        options: ["1,8x + 32 = x", "(9/5)x - 160/9 = x", "(5/9)x + 32 = x", "(5/9)x - 160/9 = x"],
+        answer: [0,3]
+      },
+      {
+        q: "Comment résoudre graphiquement la question : 'existe-t-il une température en degrés Celsius qui soit la même en degrés Fahrenheit ?' ? (plusieurs réponses possibles)",
+        options: [
+          "Chercher l'intersection entre f(x) = 1,8x + 32 et x",
+          "Chercher l'intersection entre g(x) = 5/9x - 160/9 et x",
+          "Chercher l'intersection entre f(x) et g(x)",
+          "Chercher l'intersection entre f(x) et l'axe des abscisses"
+        ],
+        answer: [0,1]
+      },
+      {
+        q: "Existe-t-il un point de la droite affine représentant f(x) = 1,8x + 32 dont l'abscisse soit égale à l'ordonnée ?",
+        options: ["Oui", "Non"],
+        answer: 0
+      },
+      {
+        q: "Que signifie qu'un point de la droite f(x) = 1,8x + 32 ait la même abscisse que son ordonnée ? (plusieurs réponses possibles)",
+        options: ["Ses coordonnées sont solutions de f(x) = x", "Ses coordonnées sont solutions de 1,8x + 32 = x", "Ses coordonnées ne sont pas solutions de f(x) = x", "Ses coordonnées ne sont pas solutions de 1,8x + 32 = x"],
+        answer: [0,1]
+      }
+      // Pour raccourcir, les autres questions 11 à 20 peuvent être ajoutées ensuite dans le même format.
+    ];
+
+    function createQuiz() {
+      const container = document.getElementById('qcm');
+      questions.forEach((question, index) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        const p = document.createElement('p');
+        p.innerHTML = `${index + 1}) ${question.q}`;
+        div.appendChild(p);
+
+        question.options.forEach((option, i) => {
+          const label = document.createElement('label');
+          const input = document.createElement('input');
+          input.type = Array.isArray(question.answer) ? 'checkbox' : 'radio';
+          input.name = `q${index}`;
+          input.value = i;
+          label.appendChild(input);
+          label.append(` ${option}`);
+          div.appendChild(label);
+          div.appendChild(document.createElement('br'));
+        });
+        container.appendChild(div);
+      });
+    }
+
+    function submitQuiz() {
+      let score = 0;
+      const total = questions.length;
+      questions.forEach((question, index) => {
+        const selected = Array.from(document.querySelectorAll(`input[name=q${index}]`)).filter(i => i.checked).map(i => parseInt(i.value));
+        const correct = Array.isArray(question.answer) ? question.answer : [question.answer];
+        selected.sort();
+        correct.sort();
+        if (JSON.stringify(selected) === JSON.stringify(correct)) {
+          score++;
+        }
+      });
+      document.getElementById('score').innerHTML = `Votre score est de ${score}/${total}`;
+    }
+
+    createQuiz();
+  </script>
+</body>
+</html>

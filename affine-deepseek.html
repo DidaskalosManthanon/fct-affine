@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversion Celsius-Fahrenheit</title>
+    <script src="https://www.geogebra.org/apps/deployggb.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .geogebra-container {
+            width: 100%;
+            height: 400px;
+            margin: 20px 0;
+            border: 1px solid #ccc;
+        }
+        .question {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .options {
+            margin-left: 20px;
+        }
+        .option {
+            margin: 5px 0;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #results {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            display: none;
+        }
+        #score {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2E86C1;
+        }
+        .correct {
+            color: green;
+            font-weight: bold;
+        }
+        .incorrect {
+            color: red;
+        }
+        .explanation {
+            margin-top: 5px;
+            font-style: italic;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Conversion entre degrés Celsius et Fahrenheit</h1>
+    
+    <div class="geogebra-container" id="ggb-element"></div>
+    
+    <h2>Questionnaire à choix multiples</h2>
+    
+    <form id="quiz-form">
+        <!-- Question 1 -->
+        <div class="question">
+            <p>1) Quel est l'équivalent de 0°C en degrés Fahrenheit ?</p>
+            <div class="options">
+                <div class="option"><input type="radio" name="q1" value="a"> a) 0°F</div>
+                <div class="option"><input type="radio" name="q1" value="b"> b) 32°F</div>
+                <div class="option"><input type="radio" name="q1" value="c"> c) -32°F</div>
+                <div class="option"><input type="radio" name="q1" value="d"> d) 16°F</div>
+            </div>
+        </div>
+        
+        <!-- Question 2 -->
+        <div class="question">
+            <p>2) Quel est l'équivalent de 0°F en degrés Celsius ?</p>
+            <div class="options">
+                <div class="option"><input type="radio" name="q2" value="a"> a) 0°C</div>
+                <div class="option"><input type="radio" name="q2" value="b"> b) 32°C</div>
+                <div class="option"><input type="radio" name="q2" value="c"> c) -160/9 °C (environ -17,78°C)</div>
+                <div class="option"><input type="radio" name="q2" value="d"> d) -17°C</div>
+            </div>
+        </div>
+        
+        <!-- Question 3 -->
+        <div class="question">
+            <p>3) Quelle est la fonction permettant de passer des degrés Fahrenheit aux degrés Celsius ?</p>
+            <div class="options">
+                <div class="option"><input type="radio" name="q3" value="a"> a) \( g(x) = \frac{5}{9}x - 32 \)</div>
+                <div class="option"><input type="radio" name="q3" value="b"> b) \( g(x) = 0,55x - 32 \)</div>
+                <div class="option"><input type="radio" name="q3" value="c"> c) \( g(x) = 0,55x - 18 \)</div>
+                <div class="option"><input type="radio" name="q3" value="d"> d) \( g(x) = \frac{5}{9}x - \frac{160}{9} \)</div>
+            </div>
+        </div>
+        
+        <!-- Question 4 -->
+        <div class="question">
+            <p>4) Existe-t-il une température qui soit la même en degrés Celsius et degrés Fahrenheit ?</p>
+            <div class="options">
+                <div class="option"><input type="radio" name="q4" value="a"> a) Oui</div>
+                <div class="option"><input type="radio" name="q4" value="b"> b) Non</div>
+            </div>
+        </div>
+        
+        <!-- Question 5 -->
+        <div class="question">
+            <p>5) Que vaut -40°C en degrés Fahrenheit ?</p>
+            <div class="options">
+                <div class="option"><input type="radio" name="q5" value="a"> a) -8°F</div>
+                <div class="option"><input type="radio" name="q5" value="b"> b) -72°F</div>
+                <div class="option"><input type="radio" name="q5" value="c"> c) -40°F</div>
+                <div class="option"><input type="radio" name="q5" value="d"> d) 8°F</div>
+            </div>
+        </div>
+        
+        <!-- Question 6 -->
+        <div class="question">
+            <p>6) Que vaut -40°F en degrés Celsius ?</p>
+            <div class="options">
+                <div class="option"><input type="radio" name="q6" value="a"> a) -8°C</div>
+                <div class="option"><input type="radio" name="q6" value="b"> b) -72°C</div>
+                <div class="option"><input type="radio" name="q6" value="c"> c) -40°C</div>
+                <div class="option"><input type="radio" name="q6" value="d"> d) 8°C</div>
+            </div>
+        </div>
+        
+        <!-- Question 7 -->
+        <div class="question">
+            <p>7) Comment traduire la phrase : "existe-t-il une température en degrés Celsius qui soit la même en degrés Fahrenheit ?" en équation ? (plusieurs réponses possibles)</p>
+            <div class="options">
+                <div class="option"><input type="checkbox" name="q7" value="a"> a) \( 1,8x + 32 = x \)</div>
+                <div class="option"><input type="checkbox" name="q7" value="b"> b) \( \frac{9}{5}x - \frac{160}{9} = x \)</div>
+                <div class="option"><input type="checkbox" name="q7" value="c"> c) \( \frac{5}{9}x + 32 = x \)</div>
+                <div class="option"><input type="checkbox" name="q7" value="d"> d) \( \frac{5}{9}x - \frac{160}{9} = x \)</div>
+            </div>
+        </div>
+        
+        <!-- Question 8 -->
+        <div class="question">
+            <p>8) Comment résoudre la question : "existe-t-il une température en degrés Celsius qui soit la même en degrés Fahrenheit ?" graphiquement ? (plusieurs réponses possibles)</p>
+            <div class="options">
+                <div class="option"><input type="checkbox" name="q8" value="a"> a) Chercher l'intersection entre la représentation graphique de la fonction \( x \mapsto 1,8x + 32 \) et la première diagonale \( x \mapsto x \)</div>
+                <div class="option"><input type="checkbox" name="q8" value="b"> b) Chercher l'intersection entre la représentation graphique de la fonction \( x \mapsto \frac{5}{9}x - \frac{160}{9} \) et la première diagonale \( x \mapsto x \)</div>
+                <div class="option"><input type="checkbox" name="q8" value="c"> c) Chercher l'intersection entre la représentation graphique de la fonction \( x \mapsto 1,8x + 32 \) et la représentation graphique de la fonction \( x \mapsto \frac{5}{9}x - \frac{160}{9} \)</div>
+                <div class="option"><input type="checkbox" name="q8" value="d"> d) Chercher l'intersection entre la représentation graphique de la fonction \( x \mapsto 1,8x + 32 \) et l'axe des abscisses</div>
+            </div>
+        </div>
+        
+        <!-- Question 9 -->
+        <div class="question">
+            <p>9) Existe-t-il un point de la droite affine représentant la fonction \( f(x) = 1,8x + 32 \) dont l'abscisse soit égale à l'ordonnée ?</p>
+            <div class="options">
+                <div class="option"><input type="radio" name="q9" value="a"> a) Oui</div>
+                <div class="option"><input type="radio" name="q9" value="b"> b) Non</div>
+            </div>
+        </div>
+        
+        <!-- Question 10 -->
+        <div class="question">
+            <p>10) Que signifie qu'un point de la droite affine représentant la fonction \( f(x) = 1,8x + 32 \) ait la même abscisse que son ordonnée ? (plusieurs réponses possibles)</p>
+            <div class="options">
+                <div class="option"><input type="checkbox" name="q10" value="a"> a) Que ses coordonnées sont solutions de l'équation \( f(x) = x \)</div>
+                <div class="option"><input type="checkbox" name="q10" value="b"> b) Que ses coordonnées sont solutions de l'équation \( 1,8x + 32 = x \)</div>
+                <div class="option"><input type="checkbox" name="q10" value="c"> c) Que ses coordonnées ne sont pas solutions de l'équation \( f(x) = x \)</div>
+                <div class="option"><input type="checkbox" name="q10" value="d"> d) Que ses coordonnées ne sont pas solutions de l'équation \( 1,8x + 32 = x \)</div>
+            </div>
+        </div>
+        
+        <!-- Question 11 -->
+        <div class="question">
+            <p>11) Existe-t-il un point de la droite affine représentant la fonction \( g(x) = \frac{5}{9}x - \frac{160}{9} \) dont l'abscisse soit égale à l'ordonnée ?</p>
+            <div class="options">
+                <div class="option"><input type="radio" name="q11" value="a"> a) Oui</div>
+                <div class="option"><input type="radio" name="q11" value="b"> b) Non</div>
+            </div>
+        </div>
+        
+        <!-- Question 12 -->
+        <div class="question">
+            <p>12) Que signifie qu'un point de la droite affine représentant la fonction \( g(x) = \frac{5}{9}x - \frac{160}{9} \) ait la même abscisse que son ordonnée ? (plusieurs réponses possibles)</p>
+            <div class="options">
+                <div class="option"><input type="checkbox" name="q12" value="a"> a) Que ses coordonnées sont solutions de l'équation \( g(x) = x \)</div>
+                <div class="option"><input type="checkbox" name="q12" value="b"> b) Que ses coordonnées sont solutions de l'équation \( \frac{5}{9}x - \frac{160}{9} = x \)</div>
+                <div class="option"><input type="checkbox" name="q12" value="c"> c) Que ses coordonnées ne sont pas solutions de l'équation \( g(x) = x \)</div>
+                <div class="option"><input type="checkbox" name="q12" value="d"> d) Que ses coordonnées ne sont pas solutions de l'équation \( \frac{5}{9}x - \frac{160}{9} = x \)</div>
+            </div>
+        </div>
+        
+        <!-- Question 13 -->
+        <div class="question">
+            <p>13) Par lecture graphique que peut-on observer ? (plusieurs réponses possibles)</p>
+            <div class="options">
+                <div class="option"><input type="checkbox" name="q13" value="a"> a) Que la droite représentative de la fonction \( f(x) = 1,8x + 32 \) augmente moins vite que celle de la fonction \( g(x) = \frac{5}{9}x - \frac{160}{9} \)</div>
+                <div class="option"><input type="checkbox" name="q13" value="b"> b) Que les droites représentatives des fonctions \( f(x) = 1,8x + 32 \) et \( g(x) = \frac{5}{9}x - \frac{160}{9} \) sont parallèles</div>
+                <div class="option"><input type="checkbox" name="q13" value="c"> c) Que la droite représentative de la fonction \( f(x) = 1,8x + 32 \) augmente plus vite que celle de la fonction \( g(x) = \frac{5}{9}x - \frac{160}{9} \)</div>
+                <div class="option"><input type="checkbox" name="q13" value="d"> d) Que les droites représentatives des fonctions \( f(x) = 1,8x + 32 \) et \( g(x) = \frac{5}{9}x - \frac{160}{9} \) ne sont pas parallèles</div>
+            </div>
+        </div>
+        
+        <!-- Question 14 -->
+        <div class="question">
+            <p>14) Si la température augmente d'1°C alors de combien augmente-t-elle en degré Fahrenheit ?</p>
+            <div class="options">
+                <div class="option"><input type="radio" name="q14" value="a"> a) 1°F</div>
+                <div class="option"><input type="radio" name="q14" value="b"> b) 32°F</div>
+                <div class="option"><input type="radio" name="q14" value="c"> c) 1,8°F</div>
+                <div class="option"><input type="radio" name="q14" value="d"> d) ça dépend de la température initiale</div>
+            </div>
+        </div>
+        
+        <!-- Question 15 -->
+        <div class="question">
+            <p>15) Si la température augmente d'1°F alors de combien augmente-t-elle en degré Celsius ?</p>
+            <div class="options">
+                <div class="option"><input type="radio" name="q15" value="a"> a) 1°C</div>
+                <div class="option"><input type="radio" name="q15" value="b"> b) \(-\frac{160}{9}\)°F</div>
+                <div class="option"><input type="radio" name="q15" value="c"> c) \( \frac{5}{9} \)°F (environ 0,56)</div>
+                <div class="option"><input type="radio" name="q15" value="d"> d) ça dépend de la température initiale</div>
+            </div>
+        </div>
+        
+        <!-- Question 16 -->
+        <div class="question">
+            <p>16) En physique, le système international des unités a choisi le Kelvin pour mesurer les températures de façon absolue. Le zéro est la température la plus froide de l'univers et correspond à -273,15°C. Quelle est sa valeur en degrés Fahrenheit ? (plusieurs réponses possibles)</p>
+            <div class="options">
+                <div class="option"><input type="checkbox" name="q16" value="a"> a) -460°F</div>
+                <div class="option"><input type="checkbox" name="q16" value="b"> b) -459,67°F</div>
+                <div class="option"><input type="checkbox" name="q16" value="c"> c) \( -273,15 \times 1,8 + 32 \) °F</div>
+                <div class="option"><input type="checkbox" name="q16" value="d"> d) -469,67°F</div>
+            </div>
+        </div>
+        
+        <!-- Question 17 -->
+        <div class="question">
+            <p>17) La fonction permettant de calculer les Kelvin à partir des degrés Celsius est la suivante : \( k(x) = x + 273,15 \) où x désigne la température en degrés Celsius. Cette fonction est-elle affine ?</p>
+            <div class="options">
+                <div class="option"><input type="radio" name="q17" value="a"> a) Oui</div>
+                <div class="option"><input type="radio" name="q17" value="b"> b) Non</div>
+            </div>
+        </div>
+        
+        <!-- Question 18 -->
+        <div class="question">
+            <p>18) Comment déterminer la fonction permettant de calculer les Kelvin à partir des degrés Fahrenheit ? (plusieurs réponses possibles)</p>
+            <div class="options">
+                <div class="option"><input type="checkbox" name="q18" value="a"> a) En multipliant par \( \frac{5}{9} \) puis en retranchant \( \frac{160}{9} \)</div>
+                <div class="option"><input type="checkbox" name="q18" value="b"> b) En remplaçant x par \( g(x) = \frac{5}{9}x - \frac{160}{9} \) dans l'expression k(x) avec cette fois x qui désigne la température en degrés Fahrenheit</div>
+                <div class="option"><input type="checkbox" name="q18" value="c"> c) À l'aide de la fonction \( k_2(x) = \frac{5}{9}x - \frac{2298,35}{9} \) où x désigne la température en degrés Fahrenheit</div>
+                <div class="option"><input type="checkbox" name="q18" value="d"> d) À l'aide de la fonction \( k_3(x) = \frac{9}{5}x + 305,15 \)</div>
+            </div>
+        </div>
+        
+        <!-- Question 19 -->
+        <div class="question">
+            <p>19) Quelle fonction permet d'exprimer les degrés Celsius en fonction des Kelvin ?</p>
+            <div class="options">
+                <div class="option"><input type="radio" name="q19" value="a"> a) \( c(x) = x - 273,15 \) où x désigne les Kelvin</div>
+                <div class="option"><input type="radio" name="q19" value="b"> b) \( c(x) = 273,15x \)</div>
+                <div class="option"><input type="radio" name="q19" value="c"> c) \( c(x) = 273,15 - x \)</div>
+                <div class="option"><input type="radio" name="q19" value="d"> d) \( c(x) = x - \frac{1}{273,15} \)</div>
+            </div>
+        </div>
+        
+        <!-- Question 20 -->
+        <div class="question">
+            <p>20) Quelle fonction permet d'exprimer les degrés Fahrenheit en fonction des Kelvin ? (plusieurs réponses possibles)</p>
+            <div class="options">
+                <div class="option"><input type="checkbox" name="q20" value="a"> a) \( f_2(x) = \frac{9}{5}x - 241,15 \) où x désigne les Kelvin</div>
+                <div class="option"><input type="checkbox" name="q20" value="b"> b) \( f_2(x) = \frac{9}{5}c(x) + 32 \) où x désigne les Kelvin</div>
+                <div class="option"><input type="checkbox" name="q20" value="c"> c) \( f_2(x) = 1,8x - 459,67 \) où x désigne les Kelvin</div>
+                <div class="option"><input type="checkbox" name="q20" value="d"> d) \( f_2(x) = 1,8x - 469,67 \) où x désigne les Kelvin</div>
+            </div>
+        </div>
+        
+        <button type="button" id="submit-btn">Valider les réponses</button>
+    </form>
+    
+    <div id="results">
+        <h2>Résultats</h2>
+        <p>Votre score : <span id="score">0</span>/20</p>
+        <div id="answers"></div>
+    </div>
+
+    <script>
+        // Configuration GeoGebra
+        var ggbApp = new GGBApplet({
+            "appName": "graphing",
+            "width": 800,
+            "height": 400,
+            "showToolBar": true,
+            "showAlgebraInput": true,
+            "showMenuBar": true,
+            "material_id": "r3j3m2v7"
+        }, true);
+        
+        window.addEventListener("load", function() {
+            ggbApp.inject('ggb-element');
+        });
+
+        // Réponses correctes
+        const correctAnswers = {
+            q1: "b",
+            q2: "c",
+            q3: "d",
+            q4: "a",
+            q5: "c",
+            q6: "c",
+            q7: ["a", "b"],
+            q8: ["a", "b"],
+            q9: "a",
+            q10: ["a", "b"],
+            q11: "a",
+            q12: ["a", "b"],
+            q13: ["c", "d"],
+            q14: "c",
+            q15: "c",
+            q16: ["b", "c"],
+            q17: "a",
+            q18: ["b", "c"],
+            q19: "a",
+            q20: ["a", "b", "c"]
+        };
+
+        // Explications des réponses
+        const explanations = {
+            q1: "La formule de conversion est \( F = \frac{9}{5}C + 32 \). Pour \( C = 0 \), on obtient \( F = 32 \).",
+            q2: "La formule inverse est \( C = \frac{5}{9}(F - 32) \). Pour \( F = 0 \), \( C = \frac{5}{9}(-32) = -\frac{160}{9} \approx -17,78°C \).",
+            q3: "La fonction correcte est \( g(x) = \frac{5}{9}x - \frac{160}{9} \) qui est équivalente à \( \frac{5}{9}(x - 32) \).",
+            q4: "Oui, à -40° les deux échelles donnent la même valeur.",
+            q5: "\( F = \frac{9}{5} \times (-40) + 32 = -72 + 32 = -40°F \).",
+            q6: "Par symétrie avec la question 5, ou par calcul: \( C = \frac{5}{9} \times (-40 - 32) = \frac{5}{9} \times (-72) = -40°C \).",
+            q7: "Les équations correctes sont \( 1,8x + 32 = x \) et \( \frac{9}{5}x - \frac{160}{9} = x \) (qui est équivalente à la première).",
+            q8: "On peut chercher l'intersection avec la première diagonale (\( y = x \)) pour l'une ou l'autre des fonctions de conversion.",
+            q9: "Oui, c'est le point où \( f(x) = x \), c'est-à-dire à -40°.",
+            q10: "Cela signifie que les coordonnées vérifient \( f(x) = x \) ou \( 1,8x + 32 = x \).",
+            q11: "Oui, c'est le même point que pour la question 9 (-40°).",
+            q12: "Cela signifie que les coordonnées vérifient \( g(x) = x \) ou \( \frac{5}{9}x - \frac{160}{9} = x \).",
+            q13: "La pente de \( f \) est 1,8, celle de \( g \) est \( \frac{5}{9} \approx 0,555 \), donc \( f \) augmente plus vite et les droites ne sont pas parallèles.",
+            q14: "Un changement de 1°C correspond à un changement de 1,8°F (car \( \frac{9}{5} = 1,8 \)).",
+            q15: "Un changement de 1°F correspond à un changement de \( \frac{5}{9}°C \approx 0,56°C \).",
+            q16: "0K = -273,15°C = \( -273,15 \times 1,8 + 32 = -459,67°F \). L'option a) est une approximation courante.",
+            q17: "Oui, c'est une fonction affine de la forme \( k(x) = ax + b \) avec \( a = 1 \) et \( b = 273,15 \).",
+            q18: "On peut composer les fonctions \( k \) et \( g \), ce qui donne \( k(g(x)) = \frac{5}{9}x - \frac{160}{9} + 273,15 = \frac{5}{9}x - \frac{2298,35}{9} \).",
+            q19: "La fonction inverse est \( c(x) = x - 273,15 \).",
+            q20: "Les fonctions correctes sont \( \frac{9}{5}x - 241,15 \), \( \frac{9}{5}c(x) + 32 \) et \( 1,8x - 459,67 \) (toutes équivalentes)."
+        };
+
+        // Calcul du score
+        document.getElementById('submit-btn').addEventListener('click', function() {
+            let score = 0;
+            let answersHtml = '';
+            
+            for (let i = 1; i <= 20; i++) {
+                const questionName = 'q' + i;
+                const userAnswers = getSelectedOptions(questionName);
+                const correct = correctAnswers[questionName];
+                
+                let isCorrect;
+                if (Array.isArray(correct)) {
+                    // Pour les questions à choix multiples
+                    isCorrect = arraysEqual(userAnswers.sort(), correct.sort());
+                } else {
+                    // Pour les questions à choix unique
+                    isCorrect = userAnswers.length === 1 && userAnswers[0] === correct;
+                }
+                
+                if (isCorrect) {
+                    score++;
+                    answersHtml += `<div class="correct">Question ${i}: Correct! ${explanations[questionName]}</div>`;
+                } else {
+                    const correctAnswerText = Array.isArray(correct) ? correct.join(', ') : correct;
+                    answersHtml += `<div class="incorrect">Question ${i}: Incorrect. Vous avez répondu ${userAnswers.join(', ') || 'rien'}. La bonne réponse était ${correctAnswerText}. ${explanations[questionName]}</div>`;
+                }
+            }
+            
+            document.getElementById('score').textContent = score;
+            document.getElementById('answers').innerHTML = answersHtml;
+            document.getElementById('results').style.display = 'block';
+            
+            // Faire défiler jusqu'aux résultats
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // Fonction utilitaire pour récupérer les réponses sélectionnées
+        function getSelectedOptions(questionName) {
+            const inputs = document.querySelectorAll(`input[name="${questionName}"]:checked`);
+            return Array.from(inputs).map(input => input.value);
+        }
+        
+        // Fonction utilitaire pour comparer deux tableaux
+        function arraysEqual(a, b) {
+            if (a.length !== b.length) return false;
+            for (let i = 0; i < a.length; i++) {
+                if (a[i] !== b[i]) return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>

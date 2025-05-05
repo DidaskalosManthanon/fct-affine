@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversion Celsius-Fahrenheit</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .geogebra-embed {
+            width: 800px;
+            height: 600px;
+            margin-bottom: 20px;
+        }
+        .question {
+            margin-bottom: 10px;
+        }
+        .score {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Conversion entre degrés Celsius et degrés Fahrenheit</h1>
+
+    <!-- Embed GeoGebra -->
+    <div class="geogebra-embed">
+        <iframe scrolling="no" src="https://www.geogebra.org/material/iframe/id/your-geogebra-id/width/800/height/600/border/888888/" width="800px" height="600px" style="border:0px;"> </iframe>
+    </div>
+
+    <!-- QCM -->
+    <form id="qcm-form">
+        <div class="question">
+            <p>1) Quel est l'équivalent de 0°C en degrés Fahrenheit ?</p>
+            <label><input type="radio" name="q1" value="a"> a) 0°F</label><br>
+            <label><input type="radio" name="q1" value="b"> b) 32°F</label><br>
+            <label><input type="radio" name="q1" value="c"> c) -32°F</label><br>
+            <label><input type="radio" name="q1" value="d"> d) 16°F</label>
+        </div>
+
+        <!-- Add more questions here... -->
+
+        <div class="question">
+            <p>20) Quelle fonction permet d'exprimer les degrés Fahrenheit en fonction des Kelvin ? (plusieurs réponses possibles)</p>
+            <label><input type="checkbox" name="q20" value="a"> a) \( f_2(x) = \frac{9}{5}x - 241,15 \) où \( x \) désigne les Kelvin</label><br>
+            <label><input type="checkbox" name="q20" value="b"> b) \( f_2(x) = \frac{9}{5}c(x) + 32 \) où \( x \) désigne les Kelvin</label><br>
+            <label><input type="checkbox" name="q20" value="c"> c) \( f_2(x) = 1,8x - 459,67 \) où \( x \) désigne les Kelvin</label><br>
+            <label><input type="checkbox" name="q20" value="d"> d) \( f_2(x) = 1,8x - 469,67 \) où \( x \) désigne les Kelvin</label>
+        </div>
+
+        <button type="button" onclick="calculateScore()">Soumettre</button>
+    </form>
+
+    <!-- Score and correct answers -->
+    <div class="score" id="score-display"></div>
+    <div id="correct-answers"></div>
+
+    <script>
+        function calculateScore() {
+            const answers = {
+                q1: 'b',
+                q2: 'c',
+                q3: 'd',
+                q4: 'a',
+                q5: 'c',
+                q6: 'c',
+                q7: ['a', 'd'],
+                q8: ['a', 'b'],
+                q9: 'a',
+                q10: ['a', 'b'],
+                q11: 'a',
+                q12: ['a', 'b'],
+                q13: ['c', 'd'],
+                q14: 'c',
+                q15: 'c',
+                q16: ['a', 'b', 'c'],
+                q17: 'a',
+                q18: ['b', 'c'],
+                q19: 'a',
+                q20: ['a', 'b', 'c']
+            };
+
+            let score = 0;
+            let correctAnswersDisplay = '<h2>Réponses correctes :</h2>';
+
+            for (const [key, value] of Object.entries(answers)) {
+                const userAnswer = document.querySelectorAll(`input[name="${key}"]:checked`);
+                const userValues = Array.from(userAnswer).map(input => input.value);
+
+                if (Array.isArray(value)) {
+                    if (userValues.length === value.length && userValues.every(v => value.includes(v))) {
+                        score++;
+                    }
+                } else {
+                    if (userValues.length === 1 && userValues[0] === value) {
+                        score++;
+                    }
+                }
+
+                correctAnswersDisplay += `<p>${key.replace('q', '')}) ${value}</p>`;
+            }
+
+            document.getElementById('score-display').innerText = `Score : ${score} / 20`;
+            document.getElementById('correct-answers').innerHTML = correctAnswersDisplay;
+        }
+    </script>
+</body>
+</html>

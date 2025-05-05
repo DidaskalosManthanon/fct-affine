@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Conversion Celsius-Fahrenheit</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .question { margin-bottom: 15px; }
+        .hidden { display: none; }
+        .results { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Conversion entre degrés Celsius et Fahrenheit</h1>
+    
+    <!-- Fenêtre GeoGebra -->
+    <div id="ggbApplet" style="width: 100%; height: 400px;"></div>
+    <script src="https://www.geogebra.org/apps/deployggb.js"></script>
+    <script>
+        var applet = new GGBApplet({
+            "appName": "graphing",
+            "showToolBar": true,
+            "showAlgebraInput": true,
+            "showMenuBar": true,
+            "showZoomButtons": true,
+            "enable3D": false,
+            "filename": "https://www.geogebra.org/m/fq5xvxgw" // Fichier GeoGebra avec la fonction f(x)=1.8x+32
+        }, true);
+        window.addEventListener("load", function () {
+            applet.inject('ggbApplet');
+        });
+    </script>
+    <p>Utilisez l'application GeoGebra ci-dessus pour explorer la fonction de conversion. En dessous, répondez au QCM.</p>
+    
+    <!-- QCM -->
+    <form id="quizForm">
+        <!-- Questions 1 à 20 -->
+        <div class="question">
+            <p>1) Quel est l'équivalent de 0°C en degrés Fahrenheit ?</p>
+            <label><input type="radio" name="q1" value="a"> a) 0°F</label><br>
+            <label><input type="radio" name="q1" value="b"> b) 32°F</label><br>
+            <label><input type="radio" name="q1" value="c"> c) -32°F</label><br>
+            <label><input type="radio" name="q1" value="d"> d) 16°F</label>
+        </div>
+        
+        <div class="question">
+            <p>2) Quel est l'équivalent de 0°F en degrés Celsius ?</p>
+            <label><input type="radio" name="q2" value="a"> a) 0°C</label><br>
+            <label><input type="radio" name="q2" value="b"> b) 32°C</label><br>
+            <label><input type="radio" name="q2" value="c"> c) -$$\\frac{160}{9}$$ °C</label><br>
+            <label><input type="radio" name="q2" value="d"> d) -17°C</label>
+        </div>
+        
+        <div class="question">
+            <p>3) Quelle est la fonction permettant de passer des degrés Fahrenheit aux degrés Celsius ?</p>
+            <label><input type="radio" name="q3" value="a"> a) g(x) = $$\\frac{5}{9}$$*x - 32</label><br>
+            <label><input type="radio" name="q3" value="b"> b) g(x) = 0,55x - 32</label><br>
+            <label><input type="radio" name="q3" value="c"> c) g(x) = 0,55x - 18</label><br>
+            <label><input type="radio" name="q3" value="d"> d) g(x) = $$\\frac{5}{9}$$*x - $$\\frac{160}{9}$$</label>
+        </div>
+        
+        <div class="question">
+            <p>4) Existe-t-il une température qui soit la même en degrés Celsius et Fahrenheit ?</p>
+            <label><input type="radio" name="q4" value="a"> a) Oui</label><br>
+            <label><input type="radio" name="q4" value="b"> b) Non</label>
+        </div>
+        
+        <div class="question">
+            <p>5) Que vaut -40°C en degrés Fahrenheit ?</p>
+            <label><input type="radio" name="q5" value="a"> a) -8°F</label><br>
+            <label><input type="radio" name="q5" value="b"> b) -72°F</label><br>
+            <label><input type="radio" name="q5" value="c"> c) -40°F</label><br>
+            <label><input type="radio" name="q5" value="d"> d) 8°F</label>
+        </div>
+        
+        <div class="question">
+            <p>6) Que vaut -40°F en degrés Celsius ?</p>
+            <label><input type="radio" name="q6" value="a"> a) -8°C</label><br>
+            <label><input type="radio" name="q6" value="b"> b) -72°C</label><br>
+            <label><input type="radio" name="q6" value="c"> c) -40°C</label><br>
+            <label><input type="radio" name="q6" value="d"> d) 8°C</label>
+        </div>
+        
+        <div class="question">
+            <p>7) Comment traduire la phrase : "existe-t-il une température en degrés Celsius qui soit la même en degrés Fahrenheit ?" en équation ?</p>
+            <label><input type="checkbox" name="q7" value="a"> a) $$1,8\\times x + 32 = x$$</label><br>
+            <label><input type="checkbox" name="q7" value="b"> b) $$\\frac{9}{5}\\times x - \\frac{160}{9} = x$$</label><br>
+            <label><input type="checkbox" name="q7" value="c"> c) $$\\frac{5}{9}\\times x + 32 = x$$</label><br>
+            <label><input type="checkbox" name="q7" value="d"> d) $$\\frac{5}{9}\\times x - \\frac{160}{9} = x$$</label>
+        </div>
+        
+        <div class="question">
+            <p>8) Comment résoudre graphiquement cette question ?</p>
+            <label><input type="checkbox" name="q8" value="a"> a) Intersection entre $$x \\mapsto 1,8x + 32$$ et $$x \\mapsto x$$</label><br>
+            <label><input type="checkbox" name="q8" value="b"> b) Intersection entre $$x \\mapsto \\frac{5}{9}x - \\frac{160}{9}$$ et $$x \\mapsto x$$</label><br>
+            <label><input type="checkbox" name="q8" value="c"> c) Intersection entre $$x \\mapsto 1,8x + 32$$ et $$x \\mapsto \\frac{5}{9}x - \\frac{160}{9}$$</label><br>
+            <label><input type="checkbox" name="q8" value="d"> d) Intersection avec l'axe des abscisses</label>
+        </div>
+        
+        <div class="question">
+            <p>9) Existe-t-il un point de la droite $$f(x) = 1,8x + 32$$ où l'abscisse égale l'ordonnée ?</p>
+            <label><input type="radio" name="q9" value="a"> a) Oui</label><br>
+            <label><input type="radio" name="q9" value="b"> b) Non</label>
+        </div>
+        
+        <div class="question">
+            <p>10) Que signifie qu'un tel point existe ?</p>
+            <label><input type="checkbox" name="q10" value="a"> a) Ses coordonnées sont solutions de $$f(x) = x$$</label><br>
+            <label><input type="checkbox" name="q10" value="b"> b) Ses coordonnées sont solutions de $$1,8x + 32 = x$$</label><br>
+            <label><input type="checkbox" name="q10" value="c"> c) Ses coordonnées ne sont pas solutions de $$f(x) = x$$</label><br>
+            <label><input type="checkbox" name="q10" value="d"> d) Ses coordonnées ne sont pas solutions de $$1,8x + 32 = x$$</label>
+        </div>
+        
+        <div class="question">
+            <p>11) Existe-t-il un point de la droite $$g(x) = \\frac{5}{9}x - \\frac{160}{9}$$ où l'abscisse égale l'ordonnée ?</p>
+            <label><input type="radio" name="q11" value="a"> a) Oui</label><br>
+            <label><input type="radio" name="q11" value="b"> b) Non</label>
+        </div>
+        
+        <div class="question">
+            <p>12) Que signifie qu'un tel point existe ?</p>
+            <label><input type="checkbox" name="q12" value="a"> a) Ses coordonnées sont solutions de $$g(x) = x$$</label><br>
+            <label><input type="checkbox" name="q12" value="b"> b) Ses coordonnées sont solutions de $$\\frac{5}{9}x - \\frac{160}{9} = x$$</label><br>
+            <label><input type="checkbox" name="q12" value="c"> c) Ses coordonnées ne sont pas solutions de $$g(x) = x$$</label><br>
+            <label><input type="checkbox" name="q12" value="d"> d) Ses coordonnées ne sont pas solutions de $$\\frac{5}{9}x - \\frac{160}{9} = x$$</label>
+        </div>
+        
+        <div class="question">
+            <p>13) Par lecture graphique, que peut-on observer ?</p>
+            <label><input type="checkbox" name="q13" value="a"> a) La droite $$f$$ augmente moins vite que $$g$$</label><br>
+            <label><input type="checkbox" name="q13" value="b"> b) Les droites sont parallèles</label><br>
+            <label><input type="checkbox" name="q13" value="c"> c) La droite $$f$$ augmente plus vite que $$g$$</label><br>
+            <label><input type="checkbox" name="q13" value="d"> d) Les droites ne sont pas parallèles</label>
+        </div>
+        
+        <div class="question">
+            <p>14) Si la température augmente d'1°C, de combien augmente-t-elle en Fahrenheit ?</p>
+            <label><input type="radio" name="q14" value="a"> a) 1°F</label><br>
+            <label><input type="radio" name="q14" value="b"> b) 32°F</label><br>
+            <label><input type="radio" name="q14" value="c"> c) 1,8°F</label><br>
+            <label><input type="radio" name="q14" value="d"> d) Ça dépend de la température initiale</label>
+        </div>
+        
+        <div class="question">
+            <p>15) Si la température augmente d'1°F, de combien augmente-t-elle en Celsius ?</p>
+            <label><input type="radio" name="q15" value="a"> a) 1°C</label><br>
+            <label><input type="radio" name="q15" value="b"> b) $$-\\frac{160}{9}$$°F</label><br>
+            <label><input type="radio" name="q15" value="c"> c) $$\\frac{5}{9}$$°F (≈0,56)</label><br>
+            <label><input type="radio" name="q15" value="d"> d) Ça dépend de la température initiale</label>
+        </div>
+        
+        <div class="question">
+            <p>16) Le zéro absolu (-273,15°C) en Fahrenheit vaut :</p>
+            <label><input type="checkbox" name="q16" value="a"> a) -460°F</label><br>
+            <label><input type="checkbox" name="q16" value="b"> b) -459,67°F</label><br>
+            <label><input type="checkbox" name="q16" value="c"> c) $$-273,15 \\times 1,8 + 32$$ °F</label><br>
+            <label><input type="checkbox" name="q16" value="d"> d) -469,67°F</label>
+        </div>
+        
+        <div class="question">
+            <p>17) La fonction $$k(x) = x + 273,15$$ est-elle affine ?</p>
+            <label><input type="radio" name="q17" value="a"> a) Oui</label><br>
+            <label><input type="radio" name="q17" value="b"> b) Non</label>
+        </div>
+        
+        <div class="question">
+            <p>18) Comment déterminer la fonction $$k_2(x)$$ en Fahrenheit ?</p>
+            <label><input type="checkbox" name="q18" value="a"> a) Multiplier par $$\\frac{5}{9}$$ et soustraire $$\\frac{160}{9}$$</label><br>
+            <label><input type="checkbox" name="q18" value="b"> b) Remplacer $$x$$ par $$g(x) = \\frac{5}{9}x - \\frac{160}{9}$$ dans $$k(x)$$</label><br>
+            <label><input type="checkbox" name="q18" value="c"> c) $$k_2(x) = \\frac{5}{9}x - \\frac{2298,35}{9}$$</label><br>
+            <label><input type="checkbox" name="q18" value="d"> d) $$k_3(x) = \\frac{9}{5}x + 305,15$$</label>
+        </div>
+        
+        <div class="question">
+            <p>19) Fonction pour exprimer les Celsius en fonction des Kelvin :</p>
+            <label><input type="radio" name="q19" value="a"> a) $$c(x) = x - 273,15$$</label><br>
+            <label><input type="radio" name="q19" value="b"> b) $$c(x) = 273,15x$$</label><br>
+            <label><input type="radio" name="q19" value="c"> c) $$c(x) = 273,15 - x$$</label><br>
+            <label><input type="radio" name="q19" value="d"> d) $$c(x) = x - \\frac{1}{273,15}$$</label>
+        </div>
+        
+        <div class="question">
+            <p>20) Fonction pour exprimer les Fahrenheit en fonction des Kelvin :</p>
+            <label><input type="checkbox" name="q20" value="a"> a) $$f_2(x) = \\frac{9}{5}x - 241,15$$</label><br>
+            <label><input type="checkbox" name="q20" value="b"> b) $$f_2(x) = \\frac{9}{5}c(x) + 32$$</label><br>
+            <label><input type="checkbox" name="q20" value="c"> c) $$f_2(x) = 1,8x - 459,67$$</label><br>
+            <label><input type="checkbox" name="q20" value="d"> d) $$f_2(x) = 1,8x - 469,67$$</label>
+        </div>
+        
+        <button type="button" onclick="checkAnswers()">Vérifier les réponses</button>
+    </form>
+    
+    <!-- Résultats -->
+    <div id="results" class="hidden results">
+        <h2>Résultats</h2>
+        <p>Votre score : <span id="score"></span>/20</p>
+        <div id="answersList"></div>
+    </div>
+    
+    <script>
+        var correctAnswers = {
+            q1: 'b',
+            q2: 'c',
+            q3: 'd',
+            q4: 'a',
+            q5: 'c',
+            q6: 'c',
+            q7: ['a', 'd'],
+            q8: ['a', 'c'],
+            q9: 'a',
+            q10: ['a', 'b'],
+            q11: 'a',
+            q12: ['a', 'b'],
+            q13: ['c', 'd'],
+            q14: 'c',
+            q15: 'c',
+            q16: ['b', 'c'],
+            q17: 'a',
+            q18: ['b', 'c'],
+            q19: 'a',
+            q20: ['b', 'c']
+        };
+
+        function checkAnswers() {
+            var form = document.getElementById('quizForm');
+            var score = 0;
+            var answersList = '';
+            for (var i = 1; i <= 20; i++) {
+                var questionName = 'q' + i;
+                var userAnswers = [];
+                var inputs = form[questionName];
+                if (!inputs) continue;
+                if (inputs.length) {
+                    for (var j = 0; j < inputs.length; j++) {
+                        if (inputs[j].checked) {
+                            userAnswers.push(inputs[j].value);
+                        }
+                    }
+                } else {
+                    if (inputs.checked) {
+                        userAnswers.push(inputs.value);
+                    }
+                }
+                var correct = correctAnswers[questionName];
+                var isCorrect = false;
+                if (Array.isArray(correct)) {
+                    isCorrect = arraysEqual(correct.sort(), userAnswers.sort());
+                } else {
+                    isCorrect = (userAnswers.length === 1 && userAnswers[0] === correct);
+                }
+                if (isCorrect) {
+                    score++;
+                }
+                answersList += '<p>Question ' + i + ': ' + (isCorrect ? 'Correct' : 'Incorrect') + '</p>';
+            }
+            document.getElementById('score').textContent = score;
+            document.getElementById('answersList').innerHTML = answersList;
+            document.getElementById('results').classList.remove('hidden');
+        }
+
+        function arraysEqual(a, b) {
+            if (a.length !== b.length) return false;
+            for (var i = 0; i < a.length; i++) {
+                if (a[i] !== b[i]) return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QCM sur les fonctions affines</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.geogebra.org/apps/deployggb.js"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+</head>
+<body>
+    <header>
+        <h1>Comprendre et utiliser la notion de fonction affine (niveau 3<sup>ème</sup>)</h1>
+        <h2>Ce que sait faire l'élève (voir les <a href="https://eduscol.education.fr/document/14068/download" target="_blank">attendus de fin d'année</a>)</h2>
+        <ul>
+            <li id="CQSFE1">
+                Il utilise les notations et le vocabulaire fonctionnels :
+                <a href="#MEO1">mise en oeuvre concrète.</a>
+            </li>
+            <li id="CQSFE2">
+                Il passe d'un mode de représentation d'une fonction à un autre :
+                <a href="#MEO2">mise en oeuvre concrète.</a>
+            </li>
+            <li id="CQSFE3">
+                Il détermine, à partir de tous les modes de représentation, l'image d'un nombre :
+                <a href="#MEO3">mise en oeuvre concrète.</a>
+            </li>
+            <li id="CQSFE4">
+                Il détermine un antécédent à partir d'une représentation graphique ou d'un tableau de valeurs d'une fonction :
+                <a href="#MEO4">mise en oeuvre concrète.</a>
+            </li>
+            <li id="CQSFE5">
+                Il détermine de manière algébrique l'antécédent par une fonction, dans des cas se ramenant à la résolution d'une équation du premier degré :
+                <a href="#MEO5">mise en oeuvre concrète.</a>
+            </li>
+            <li id="CQSFE6">
+                Il représente graphiquement une fonction linéaire, une fonction affine :
+                <a href="#MEO6">mise en oeuvre concrète.</a>
+            </li>
+            <li id="CQSFE7">
+                Il interprète les paramètres d'une fonction affine suivant l'allure de sa courbe représentative
+                <a href="#MEO7">mise en oeuvre concrète.</a>
+            </li>
+            <li id="CQSFE8">
+                Il modélise un phénomène continu par une fonction
+                <a href="#MEO8">mise en oeuvre concrète.</a>
+            </li>
+            <li id="CQSFE9">
+                Il modélise une situation de proportionnalité à l'aide d'une fonction linéaire
+                <a href="#MEO9">mise en oeuvre concrète.</a>
+            </li>
+            <li id="CQSFE10">
+                Il résout des problèmes modélisés par des fonctions en utilisant un ou plusieurs modes de représentation
+                <a href="#MEO10">mise en oeuvre concrète.</a>
+            </li>
+        </ul>
+        <h2>Exemples de réussite</h2>
+            <ul>
+                <li>
+                    Il comprend les notations : \(f : x\mapsto 3x^2 - 7\) et \(f(x) = 3x^2 - 7\) 
+                    Il sait alors que \(x\) est la variable et \(f\) la fonction.
+                </li>
+                <li>
+                    Il sait que \(g(3) = 15\) signifie que 15 est l'image de 3 par la fonction \(g\) et 
+                    que 3 est un antécédent de 15 par la fonction \(g\).
+                </li>
+                <li>
+                    Il détermine l'image d'un nombre par une fonction à partir de son expression 
+                    symbolique, de sa représentation graphique, d'un tableau de valeurs, d'un programme 
+                    de calcul.
+                </li>
+                <li>
+                    Détermine à l'aide d'une équation : 
+                    <ul>
+                        <li>
+                            l'antécédent de 10 par la fonction \(f\) définie par \(f(x) = -3x - 4\) 
+                            ;
+                        </li>
+                        <li>
+                            les antécédents de 0 par la fonction \(g\) définie par 
+                            \(g(x) = (3x + 6)(x - 9)\).
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    Il représente graphiquement les fonctions \(f : x\mapsto 5x - 1\) et 
+                    \(g : x\mapsto -3x\) 
+                    
+                </li>
+                <li>
+                    À partir de l'allure de la représentation graphique d'une fonction affine, 
+                    il détermine le signe du coefficient directeur et l'ordonnée à l'origine.
+                </li>
+                <li>
+                    Complète : l'aire d'un rectangle dont le périmètre est égal à 30 cm et dont 
+                    un côté a pour longueur \(x\) est donné par la fonction \(A : x\mapsto \dots\)
+                </li>
+                <li>
+                    Un mobile se déplace à 5 m/s. 
+                    L'élève modélise la situation par la fonction \(f\) définie 
+                    par \(f(x) = 5x\) où \(x\) est le temps exprimé en secondes
+                    et \(f(x)\) la distance parcourue, en mètres, en \(x\) secondes.
+                </li>
+                <li>
+                    On enlève quatre carrés identiques aux quatre coins d'un 
+                    rectangle de 20 cm de longueur et 13 cm de largeur.
+                    Détermine la longueur du côté de ces carrés qui correspond
+                    à une aire restante de 208,16 cm<sup>2</sup>, par la méthode
+                    de ton choix.
+                </li>
+            </ul>    
+    </header>
+    <main>
+        <section id="yourgame">
+            <h2>À vous de jouer</h2>
+            <p>
+                Dans toute la suite de ce QCM on considère la fonction :
+                \[f : x \mapsto f(x) = \dfrac{9}{5}x + 32\]
+                qui à \(x\) en degrés Celsius associe \(f(x) = 1,8x + 32\) en degrés Fahrenheit.
+            </p>
+            
+            <article>
+                <h3 id="MEO1">Notations et vocabulaire fonctionnels <a href="#CQSFE1">(revoir les attendus)</a></h3>
+                <ol start="1">
+                    <li class="question" data-points="3" data-type="checkbox">
+                        <p>
+                            Comment traduire en français \(f(x) = 1,8x + 32\) ? (plusieurs réponses possibles)
+                        </p>
+                        <ol class="resp">
+                            <li>
+                                <input type="checkbox" name="q1r1"><label for="q1r1">\(f\) est une fonction affine de coefficient directeur 32 et d'ordonnée à l'origine 1,8.</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="q1r2" data-correct><label for="q1r2">\(f\) est une fonction affine de coefficient directeur 1,8 et d'ordonnée à l'origine 32</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="q1r3" data-correct><label for="q1r3">\(f\) est la fonction qui a \(x\) en degrés Celsius associe sa multiplication par 1,8 augmentée de 32 qui donne l'équivalent en degrés Fahrenheit.</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="q1r4"><label for="q1r4">\(f\) est une fonction linéaire de coefficient directeur 32</label>
+                            </li>
+                        </ol>
+                    </li>
+                    <li class="question" data-points="4" data-type="checkbox">
+                        <p>
+                            On considère le tableau de nombres suivant :
+                            <table border="1">
+                            <tr>
+                                <td>\(x\)</td>
+                                <td>-40</td>
+                                <td>-30</td>
+                                <td>-20</td>
+                                <td>-10</td>
+                                <td>0</td>
+                                <td>10</td>
+                                <td>20</td>
+                                <td>30</td>
+                                <td>40</td>
+                            </tr>
+                            <tr>
+                                <td>\(t(x)\)</td>
+                                <td>-40</td>
+                                <td>-22</td>
+                                <td>-4</td>
+                                <td>14</td>
+                                <td>32</td>
+                                <td>50</td>
+                                <td>68</td>
+                                <td>86</td>
+                                <td>104</td>
+                            </tr>
+                        </table> <br>
+                        Avec les valeurs disponibles dans le tableau trouver les bonnes réponses :
+                        </p>
+                        <ol class="resp">
+                            <li>
+                                <input type="checkbox" name="q2r1" data-correct><label for="q2r1">-40 a pour image -40 par la fonction \(t\)</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="q2r2" data-correct><label for="q2r2">-40 a pour antécdent -40 par la fonction \(t\)</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="q2r3" data-correct><label for="q2r3">l'image de 10 par la fonction \(t\) est 50</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="q2r4" data-correct><label for="q2r4">l'antécédent de 86 par la fonction \(t\) est 30</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="q2r5" data-correct><label for="q2r5">toutes les valeurs de ce tableau sont cohérentes avec la fonction \(f\) définie par \[f(x) = \dfrac{9}{5}x + 32\]</label>
+                            </li>
+                        </ol>
+                    </li>
+                    <li class="question" data-points="3" data-type="checkbox">
+                        <p>
+                            On définit la fonction \(p\) avec le programme de calcul suivant : 
+                            <ol class="progcalc">
+                                <li>Choisir un nombre</li>
+                                <li>Multipliez-le par 9</li>
+                                <li>Diviser par 5</li>
+                                <li>Ajouter 32 au résultat</li>
+                            </ol> <br>
+
+                            Trouver les bonnes réponses 
+                        </p>
+                        <ol class="resp">
+                            <li>
+                                <input type="checkbox" id="q3r1" data-correct><label for="q3r1">L'image de \(-30\) par \(p\) est -22</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="q3r2" data-correct><label for="q3r2">\(p\) est une fonction affine</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="q3r3"><label for="q3r3">\(p\) n'est pas une fonction affine</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="q3r4" data-correct><label for="q3r4">\(p(20) = 68\)</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="q3r5" data-correct><label for="q3r5">Ce programme de calcul permet de déterminer l'image d'un nombre \(x\) par la fonction \(f\) donc \(p = f\)</label>
+                            </li>
+                        </ol>
+                    </li>
+                </ol>
+            </article>
+            
+            <article>
+                <h3 id="MEO2">Passer d'un mode de représentation à un autre <a href="#CQSFE2">(revoir les attendus)</a></h3>
+                <ol start="4">
+                    <li class="question" data-points="2" data-type="checkbox">
+                        <p>
+                            Comment traduire la phrase : "existe-t-il une température en degrés Celsius qui soit la même en degrés Fahrenheit ?" en équation ? (plusieurs réponses possibles)
+                        </p>
+                        <ol class="resp">
+                            <li>
+                                <input type="checkbox" id="q4r1" data-correct><label for="q4r1">\(1,8x + 32 = x\)</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="q4r2"><label for="q4r2">\(\dfrac{9}{5}x + 32 = \dfrac{1}{x}\)</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="q4r3" data-correct><label for="q4r3">\(\dfrac{9}{5}x + 32 = x\)</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="q4r4"><label for="q4r4">\(1,8x + 32 = -x\)</label>
+                            </li>
+                        </ol>
+                    </li>
+                    <li class="question" data-points="3" data-type="checkbox">
+                        <h4>Graphes de la fonction degrés Celsius vers degrés Fahrenheit et de la fonction linéaire identité</h4>
+                        <div class="geogebra-container">
+                            <div id="celsius2fahrenheit"></div>
+                        </div>
+                        <p>
+                            Comment résoudre la question : "existe-t-il une température en degrés Celsius qui soit la même en degrés Fahrenheit ?" graphiquement ? (plusieurs réponses possibles)
+                        </p>
+                        <ol class="resp">
+                            <li>
+                                <input type="checkbox" name="q5r1" data-correct><label for="q5r1">Chercher l'intersection entre la représentation graphique de la fonction \(x \mapsto 1,8x + 32\) et la première diagonale \(x \mapsto x\)</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="q5r2"><label for="q5r2">Chercher l'intersection entre la représentation graphique de la fonction \(x \mapsto \dfrac{9}{5}x + 32\) et la fonction \(x \mapsto \dfrac{1}{x}\)</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="q5r3" data-correct><label for="q5r3">Chercher l'intersection entre la représentation graphique de la fonction \(x \mapsto \dfrac{9}{5}x + 32\) et celle de la fonction \(x \mapsto x\)</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="q5r4"><label for="q5r4">Chercher l'intersection entre la représentation graphique de la fonction \(x \mapsto 1,8x + 32\) et celle de la fonction \(x \mapsto -x\)</label>
+                            </li>
+                        </ol>
+                
+                    </li>
+                    <li class="question" data-points="2" data-type="checkbox">
+                        <p>
+                            Que signifie qu'un point de la droite affine représentant la fonction \(f(x) = 1,8x + 32\) ait la même abscisse que son ordonnée ? (plusieurs réponses possibles)
+                        </p>
+                        <ol class="resp">
+                            <li>
+                                <input type="checkbox" name="q6r1" data-correct><label for="q6r1">Que ses coordonnées sont solutions de l'équation \(f(x) = x\)</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="q6r2" data-correct><label for="q6r2">Que ses coordonnées sont solutions de l'équation \(1,8x + 32 = x\)</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="q6r3"><label for="q6r3">Que ses coordonnées ne sont pas solutions de l'équation \(f(x) = x\)</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="q6r4"><label for="q6r4">Que ses coordonnées ne sont pas solutions de l'équation \(1,8x + 32 = x\)</label>
+                            </li>
+                        </ol>  
+                    </li>
+                    <li class="question" data-points="4" data-type="checkbox">
+                        <p>
+                            On considère le tableau de nombres évalués par la fonction \(f\) :
+                            <table border="1">
+                                <tr>
+                                    <td>\(x\)</td>
+                                    <td>-40</td>
+                                    <td>-30</td>
+                                    <td>-20</td>
+                                    <td>-10</td>
+                                    <td>0</td>
+                                    <td>10</td>
+                                    <td>20</td>
+                                    <td>30</td>
+                                    <td>40</td>
+                                </tr>
+                                <tr>
+                                    <td>\(f(x)\)</td>
+                                    <td>-40</td>
+                                    <td>-22</td>
+                                    <td>-4</td>
+                                    <td>14</td>
+                                    <td>32</td>
+                                    <td>50</td>
+                                    <td>68</td>
+                                    <td>86</td>
+                                    <td>104</td>
+                                </tr>
+                            </table> <br>
+                            En utilisant les valeurs de ce tableau, Geogebra et l'expression 
+                            algébrique de la fonction \(f(x) = 1,8x + 32\) cocher toutes les
+                            propositions vraies :
+                        <ol class="resp">
+                            <li>
+                                <input type="checkbox" name="q7r1" data-correct><label for="q7r1">Dire qu'il existe une température en degrés Celsius qui soit la même en degrés Fahrenheit signifie que l'antécédent égale l'image par \(f\).</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="q7r2" data-correct><label for="q7r2">Dans le tableau il y a une colonne où les valeurs dans les deux lignes sont identiques ce qui signifie que l'image égale l'antécédent par \(f\).</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="q7r3" data-correct><label for="q7r3">La droite affine représentant \(f\) et celle représentant \(x\mapsto x\) se coupent en \(x = -40\).</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="q7r4" data-correct><label for="q7r4">L'équation \(f(x) = x\) admet une unique solution \(x = -40\)</label>
+                            </li>
+                        </ol>
+                    </li>
+                </ol>
+            </article>
+            
+            <article>
+                <h3 id="MEO3">Image d'un nombre  <a href="#CQSFE3">(revoir les attendus)</a></h3>
+                <ol start="8">
+                    <li class="question" data-points="1" data-type="radio">
+                        <p>
+                            Quel est l'équivalent de 0°C en degrés Fahrenheit ?
+                        </p>
+                        <ol class="resp">
+                            <li>
+                                <input type="radio" id="q8r1"><label for="q8r1">0°F</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="q8r2" data-correct><label for="q8r2">32°F</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="q8r3"><label for="q8r3">-32°F</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="q8r4"><label for="q8r4">16°F</label>
+                            </li>
+                        </ol>
+                    </li>
+                    <li class="question" data-points="1" data-type="radio">
+                        <p>
+                            Que vaut -40°C en degrés Fahrenheit ?
+                        </p>
+                        <ol class="resp">
+                            <li>
+                                <input type="radio" id="q9r1"><label for="q9r1">-8°F</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="q9r2" data-correct><label for="q9r2">-72°F</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="q9r3" data-correct><label for="q9r3">-40°F</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="q9r4"><label for="q9r4">8°F</label>
+                            </li>
+                        </ol>
+                    </li>
+                </ol>
+            </article>
+
+            <article>
+                <h3 id="MEO4">Antécédent(s) d'un nombre <a href="#CQSFE4">(revoir les attendus)</a></h3>
+                <ol start="10">
+                    <li class="question" data-points="1" data-type="radio">
+                        <p>
+                            Que vaut -40°F en degrés Celsius ?
+                        </p>
+                        <ol class="resp">
+                            <li>
+                                <input type="radio" id="q10r1"><label for="q10r1">-8°C</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="q10r2" data-correct><label for="q10r2">-72°C</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="q10r3" data-correct><label for="q10r3">-40°C</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="q10r4"><label for="q10r4">8°C</label>
+                            </li>
+                        </ol>
+                    </li>
+                    <li class="question" data-points="1" data-type="radio">
+                        <p>Quel est l'équivalent de 0°F en degrés Celsius ?</p>
+                        <ol class="resp">
+                            <li>
+                                <input type="radio" id="q11r1"><label for="q11r1">0°C</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="q11r2"><label for="q11r2">32°C</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="q11r3" data-correct><label for="q11r3">\(-\dfrac{160}{9}\)°C</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="q11r4"><label for="q11r4">-17°C</label>
+                            </li>
+                        </ol>
+                    </li>
+                    
+                </ol>
+            </article>
+            <article>
+                <h3 id="MEO5">Déterminer un antécédent grâce à une équation <a href="#CQSFE5">(revoir les attendus)</a></h3>
+                
+                <ol start="12">
+                    <li class="question" data-points="3" data-type="checkbox">
+                        <p>
+                            On définit la fonction \(q\) avec le programme de calcul suivant : 
+                            <ol class="progcalc">
+                                <li>Choisir un nombre</li>
+                                <li>Lui soustraire 32</li>
+                                <li>Diviser le résultat par 1,8</li>
+                            </ol> <br>
+
+                            Trouver les bonnes réponses 
+                        </p>
+                        <ol class="resp">
+                            <li>
+                                <input type="checkbox" name="q12r1" data-correct><label for="q12r1">Si 50 est le nombre de départ alors 10 est le résultat.</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="q12r2" data-correct><label for="q12r2">Il existe un nombre de départ dont le résultat est le même.</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="q12r3"><label for="q12r3">La fonction \(q\) définie par ce programme n'est pas affine.</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="q12r4" data-correct><label for="q12r4">La fonction \(q\) définie par ce programme est affine.</label>
+                            </li>
+                        </ol>
+                    </li>
+                    <li class="question" data-points="1" data-type="radio">
+                        <p>
+                            Quelle est la fonction permettant de passer des degrés Fahrenheit aux degrés Celsius ?
+                        </p>
+                        <ol class="resp">
+                            <li>
+                                <input type="radio" name="q13r1"><label for="q13r1">\(g(x) = \dfrac{5}{9}x - 32\)</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="q13r2"><label for="q13r2">\(g(x) = 0,55x - 32\)</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="q13r3"><label for="q13r3">\(g(x) = 0,55x - 18\)</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="q13r4" data-correct><label for="q13r4">\(g(x) = \dfrac{5}{9}x - \dfrac{160}{9}\)</label>
+                            </li>
+                        </ol>
+                    </li>
+                </ol>
+            </article>
+            <article>
+                <h3 id="MEO6">Représentation graphique d'une fonction linéaire, d'une fonction affine <a href="#CQSFE6">(revoir les attendus)</a></h3>
+                <h4>Graphes de la fonction degrés Fahrenheit vers degrés Celsius, de la fonction réciproque et de l'identité</h3>
+                    <div class="geogebra-container">
+                        <div id="fahrenheit2celsius"></div>
+                    </div>
+                    <ol start="14">
+                        <li class="question" data-points="2" data-type="checkbox">
+                            <p>
+                                Par lecture graphique que peut-on observer ? (plusieurs réponses possibles)
+                            </p>
+                            <ol class="resp">
+                                <li>
+                                    <input type="checkbox" name="q14r1" data-correct><label for="q14r1">Que la droite affine représentative de la fonction \(f\) est croissante car son coefficient directeur est positif.</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" name="q14r2" data-correct><label for="q14r2">Que la droite affine représentative de la fonction \(g\) est croissante car son coefficient directeur est positif.</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" name="q14r3"><label for="q14r3">Que la droite affine représentative de la fonction \(g\) est décroissante car son coefficient directeur est négatif.</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" name="q14r4"><label for="q14r4">Que la droite affine représentative de la fonction \(g\) est décroissante car son ordonnée à l'origine est négative.</label>
+                                </li>
+                            </ol>
+                        </li>
+                    </ol>
+            </article>
+            <article>
+                <h3 id="MEO7">Interpréter les paramètres d'une fonction affine <a href="#CQSFE7">(revoir les attendus)</a></h3>
+                <ol start="15">
+                    <li class="question" data-points="2" data-type="checkbox">
+                        <p>
+                            Coche toutes les cases des propositions vraies
+                        </p>
+                        <ol class="resp">
+                            <li>
+                                <input type="checkbox" id="q15r1"><label for="q15r1">Les représentations graphiques des fonctions \(f\) et \(g\) sont parallèles car leurs coefficients directeurs sont égaux.</label> 
+                            </li>
+                            <li>
+                                <input type="checkbox" id="q15r2" data-correct><label for="q15r2">Les représentations graphiques des fonctions \(f\) et \(g\) ne sont pas parallèles car leurs coefficients directeurs ne sont pas égaux.</label> 
+                            </li>
+                            <li>
+                                <input type="checkbox" id="q15r3"><label for="q15r3">Les représentations graphiques des fonctions \(f\) et \(g\) se coupent en un point car leurs coefficients directeurs sont égaux.</label> 
+                            </li>
+                            <li>
+                                <input type="checkbox" id="q15r4" data-correct><label for="q15r4">Les représentations graphiques des fonctions \(f\) et \(g\) se coupent en un point car leurs coefficients directeurs ne sont pas égaux.</label> 
+                            </li>
+                        </ol>
+                    </li>
+                </ol>
+            </article>
+            <article>
+                <h3 id="MEO8">Modéliser un phénomène continu <a href="#CQSFE8">(revoir les attendus)</a></h3>
+                <ol start="16">
+                    <li class="question" data-points="2" data-type="checkbox">
+                        <p>
+                            En physique, le système international des unités a choisi le Kelvin pour mesurer les températures de façon absolue. Le zéro est la température la plus froide de l'univers et correspond à -273,15°C. Quelle est sa valeur en degrés Fahrenheit ? (plusieurs réponses possibles)
+                        </p>
+                        <ol class="resp">
+                            <li>
+                                <input type="checkbox" name="q16r1"><label for="q16r1">-460°F</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="q16r2" data-correct><label for="q16r2">-459,67°F</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="q16r3" data-correct><label for="q16r3">\(-273,15 \times 1,8 + 32\) °F</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="q16r4"><label for="q16r4">-469,67°F</label>
+                            </li> 
+                        </ol>
+                    </li>
+                    <li class="question" data-points="1" data-type="radio">
+                        <p>
+                            On définit la fonction \(k\) permettant d'exprimer les Kelvin en fonction des degrés Celsius avec la relation : 
+                            \[k(x) = x + 273,15\] où \(x\) désigne des degrés Celsius. <br>
+                            Quelle fonction permet d'exprimer les degrés Celsius en fonction des Kelvin ?
+                        </p>
+                        <ol class="resp">
+                            <li>
+                                <input type="radio" name="q17r1" data-correct><label for="q17r1">\(c(x) = x - 273,15\) où \(x\) désigne les Kelvin</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="q17r2"><label for="q17r2">\(c(x) = 273,15x\) où \(x\) désigne les Kelvin</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="q17r3"><label for="q17r3">\(c(x) = 273,15 - x\) où \(x\) désigne les Kelvin</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="q17r4"><label for="q17r4">\(c(x) = x - \frac{1}{273,15}\) où \(x\) désigne les Kelvin</label>
+                            </li>
+                        </ol>
+                    </li>
+                </ol>
+            </article>
+            <article>
+                <h3 id="MEO9">Modéliser une situation de proportionnalité <a href="#CQSFE9">(revoir les attendus)</a></h3>
+                <ol start="18">
+                    <li class="question" data-points="1" data-type="radio">
+                        <p>
+                            Si la température augmente d'1°C alors de combien augmente-t-elle en degré Fahrenheit ?
+                        </p>
+                        
+                        <ol class="resp">
+                            <li>
+                                <input type="radio" name="q18r1"><label for="q18r1">1°F</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="q18r2"><label for="q18r2">32°F</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="q18r3" data-correct><label for="q18r3">1,8°F</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="q18r4"><label for="q18r4">ça dépend de la température initiale</label>
+                            </li>
+                        </ol>
+                    </li>
+                    <li class="question" data-points="1" data-type="radio">
+                        <p>
+                            Si la température augmente d'1°F alors de combien augmente-t-elle en degré Celsius ?
+                        </p>
+                        <ol class="resp">
+                            <li>
+                                <input type="radio" name="q19r1"><label>1°C</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="q19r2"><label>\(-\dfrac{160}{9}\)°F (environ -17,78)</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="q19r3" data-correct><label>\(\dfrac{5}{9}\)°F (environ 0,56)</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="q19r4"><label>ça dépend de la température initiale</label>
+                            </li>
+                        </ol>
+                    </li>
+                    
+                </ol>
+            </article>
+            <article>
+                <h3 id="MEO10">Résoudre des problèmes modélisés par des fonctions <a href="#CQSFE10">(revoir les attendus)</a></h3>
+                <ol start="20">
+                    
+                    <li class="question" data-points="2" data-type="checkbox">
+                        <p>
+                            Comment déterminer la fonction permettant de calculer les Kelvin à partir des degrés Fahrenheit ? (plusieurs réponses possibles)
+                        </p>
+                        <ol class="resp">
+                            <li>
+                                <input type="checkbox" name="q20r1"><label for="q20r1">En multipliant par \(\dfrac{5}{9}\) puis en retranchant \(\dfrac{160}{9}\)</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="q20r2" data-correct><label for="q20r2">En remplaçant \(x\) par \(g(x) = \dfrac{5}{9}x - \dfrac{160}{9}\) dans l'expression \(k(x)\) avec cette fois \(x\) qui désigne la température en degrés Fahrenheit</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="q20r3" data-correct><label for="q20r3">À l'aide de la fonction \(k_2(x) = \dfrac{5}{9}x - \dfrac{2298,35}{9}\) où \(x\) désigne la température en degrés Fahrenheit</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="q20r4"><label for="q20r4">À l'aide de la fonction \(k_3(x) = \dfrac{9}{5}x + 305,15\)</label>
+                            </li>
+                        </ol>
+                    </li>
+                    
+                    
+                </ol>
+            </article>
+        </section>
+
+        <button id="submit-btn">Envoyer</button>
+        <div id="score-details">
+            <p id="score-display"></p>
+            <ul id="question-points"></ul>
+        </div>
+
+    </main>
+    
+    <footer>
+        <p>📚 Envie de progresser en maths ? Voir mon annonce sur <a href="https://www.superprof.fr/reussissez-maths-niveau-etudes-esprit.html" target="_blank">superprof</a></p>
+        <ul>
+            <li>
+                <a href="https://didaskalosmanthanon.github.io/image-fonction-affine/index.html" target="_blank">Calcul de l'image d'un nombre par une fonction affine</a>
+            </li>
+            <li>
+                <a href="https://didaskalosmanthanon.github.io/antecedent-fonction-affine/index.html" target="_blank">Antécédent d'un nombre par une fonction affine</a>
+            </li>
+            <li>
+                <a href="https://didaskalosmanthanon.github.io/quizz/index.html" target="_blank">QCMs de mathématiques (niveau 3<sup>ème</sup> - 2<sup>de</sup>)</a>
+            </li>
+            <li>
+                <a href="https://didaskalosmanthanon.github.io/quizz-stats-3eme/index.html" target="_blank">QCMs de stats (niveau 3<sup>ème</sup> - 2<sup>de</sup>)</a>
+            </li>
+            <li>
+                <a href="https://didaskalosmanthanon.github.io/qcm-numbers/" target="_blank">QCMs sur les nombres</a>
+             </li>
+            <li>
+                <a href="https://didaskalosmanthanon.github.io/geometry/index.html" target="_blank">Exercices de géométrie (niveau 3<sup>ème</sup> - 2<sup>de</sup>)</a>
+             </li>
+             <li>
+                <a href="https://didaskalosmanthanon.github.io/testimonial-slider/index.html" target="_blank">Ce que mes élèves pensent de mes cours de maths</a>
+             </li>
+        </ul>
+        <p>Pour entrer en contact remplissez ce <a href="https://forms.gle/mcZ5uMv1BjynrWrz9" target="_blank">formulaire</a></p>
+        <p>&copy; 2025 - <strong>Didaskalos Manthanon</strong>, <em>Apprenez à devenir un maître apprenant</em></p>
+        
+      </footer>
+
+      <script src="script.js"></script>
+</body>
+
+</html>

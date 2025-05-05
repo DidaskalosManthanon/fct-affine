@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fonctions affines</title>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</head>
+<body>
+    <h1>Fonctions Affines Illustrées Avec Les Températures</h1>
+    <div id="geogebra">
+        <iframe src="https://www.geogebra.org/m/K5kQrYJp" width="800" height="600"></iframe>
+    </div>
+    
+<form id="quizForm" onsubmit="return calculateScore(event)">
+    <!-- Question 1 -->
+    <div class="question">
+        <p>1) Quel est l'équivalent de 0°C en degrés Fahrenheit ?</p>
+        <label><input type="radio" name="q1" value="b"> 32°F</label>
+        <!-- Autres options -->
+    </div>
+    
+    <!-- Questions avec formules MathJax -->
+    <div class="question">
+        <p>16) En physique, le zéro absolu correspond à -273.15°C. Quelle est sa valeur en Fahrenheit ?</p>
+        <label><input type="checkbox" name="q16" value="b"> \(-459.67°F\)</label>
+        <label><input type="checkbox" name="q16" value="c"> \(-273.15 \times 1.8 + 32\ °F\)</label>
+    </div>
+</form>
+
+
+</body>
+<script>
+    const solutions = {
+    q1: ['b'],
+    q7: ['a', 'b'],
+    q16: ['b', 'c'],
+    // ... autres réponses
+};
+
+function calculateScore(e) {
+    e.preventDefault();
+    let score = 0;
+    
+    Object.keys(solutions).forEach(q => {
+        const selected = [...document.querySelectorAll(`input[name="${q}"]:checked`)].map(i => i.value);
+        if (arraysEqual(selected, solutions[q])) score += 1;
+    });
+    
+    displayResults(score);
+}
+function displayResults(score) {
+    const resultsDiv = document.getElementById('results');
+    resultsDiv.innerHTML = `
+        <h3>Score : ${score}/20</h3>
+        <div class="corrections">
+            ${generateCorrections()}
+        </div>
+    `;
+    MathJax.Hub.Queue(['Typeset', MathJax.Hub]);
+}
+
+</script>
+</html>

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversion Celsius-Fahrenheit</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script type="text/javascript">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']],
+                displayMath: [['$$','$$'], ['\\[','\\]']],
+                processEscapes: true
+            }
+        });
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        .geogebra-container {
+            width: 100%;
+            height: 500px;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+        }
+        .quiz-container {
+            margin-top: 30px;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .question p {
+            font-weight: bold;
+            margin-top: 0;
+        }
+        .options {
+            margin-left: 20px;
+        }
+        .option {
+            margin: 8px 0;
+        }
+        .option label {
+            cursor: pointer;
+        }
+        .btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .hidden {
+            display: none;
+        }
+        .correct-answers {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #e8f5e9;
+            border-radius: 5px;
+        }
+        .formula {
+            margin: 10px 0;
+        }
+        .info-box {
+            background-color: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Conversion entre degrés Celsius et Fahrenheit</h1>
+    
+    <div class="info-box">
+        <p>Cette page vous permet d'explorer la relation entre les degrés Celsius et Fahrenheit.</p>
+        <div class="formula">
+            <p>Formule de conversion de Celsius vers Fahrenheit:</p>
+            <p>$f(x) = \frac{9}{5}x + 32$ ou $f(x) = 1,8x + 32$</p>
+        </div>
+        <div class="formula">
+            <p>Formule de conversion de Fahrenheit vers Celsius:</p>
+            <p>$g(x) = \frac{5}{9}(x - 32)$ ou $g(x) = \frac{5}{9}x - \frac{160}{9}$</p>
+        </div>
+    </div>
+
+    <h2>Représentation graphique</h2>
+    <div class="geogebra-container" id="ggb-element"></div>
+    
+    <div class="quiz-container">
+        <h2>Quiz sur la conversion de température</h2>
+        <div id="score-display">Score: <span id="score">0</span> / 20</div>
+        <form id="quiz-form">
+            <div id="questions"></div>
+            <button type="button" class="btn" id="submit-btn">Vérifier les réponses</button>
+        </form>
+        <div class="result hidden" id="result"></div>
+        <div class="correct-answers hidden" id="correct-answers"></div>
+    </div>
+
+    <script src="https://www.geogebra.org/apps/deployggb.js"></script>
+    <script>
+        // Configuration de GeoGebra
+        const params = {
+            "appName": "classic",
+            "width": 800,
+            "height": 500,
+            "showToolBar": true,
+            "showAlgebraInput": true,
+            "showMenuBar": true,
+            "showResetIcon": true,
+            "enableLabelDrags": false,
+            "enableShiftDragZoom": true,
+            "enableRightClick": false,
+            "capturingThreshold": 3,
+            "appletOnLoad": function(api) {
+                // Définir les axes et les fonctions
+                api.evalCommand("f(x) = 1.8 * x + 32");
+                api.evalCommand("g(x) = 5/9 * x - 160/9");
+                api.evalCommand("SetColor(f, 0, 0, 255)"); // bleu
+                api.evalCommand("SetColor(g, 255, 0, 0)"); // rouge
+                api.evalCommand("SetLabelStyle(f, 1)");
+                api.evalCommand("SetLabelStyle(g, 1)");
+                api.evalCommand("SetCaption(f, \"f(x) = 1.8x + 32 (C → F)\")");
+                api.evalCommand("SetCaption(g, \"g(x) = 5/9x - 160/9 (F → C)\")");
+                api.evalCommand("SetAxesRanges(-100, 100, -100, 100)");
+                
+                // Point d'intersection avec la première diagonale
+                api.evalCommand("h(x) = x");
+                api.evalCommand("SetColor(h, 0, 128, 0)"); // vert
+                api.evalCommand("SetLabelStyle(h, 1)");
+                api.evalCommand("SetCaption(h, \"h(x) = x\")");
+                api.evalCommand("A = Intersect(f, h)");
+                api.evalCommand("SetPointSize(A, 5)");
+                api.evalCommand("SetPointStyle(A, 10)");
+                
+                // Points pour tester des valeurs
+                api.evalCommand("B = Point(-40, -40)");
+                api.evalCommand("SetPointSize(B, 5)");
+                api.evalCommand("SetPointStyle(B, 10)");
+                api.evalCommand("SetColor(B, 128, 0, 128)"); // violet
+                api.evalCommand("SetCaption(B, \"Point test\")");
+                
+                // Lignes pour voir les conversions
+                api.evalCommand("C = Point(0, f(0))");
+                api.evalCommand("SetPointSize(C, 5)");
+                api.evalCommand("SetPointStyle(C, 10)");
+                api.evalCommand("SetColor(C, 0, 0, 0)");
+                api.evalCommand("SetCaption(C, \"0°C = 32°F\")");
+
+                // Texte explicatif
+                api.evalCommand("text1 = Text(\"Conversion Celsius ↔ Fahrenheit\", -90, 90)");
+                api.evalCommand("text2 = Text(\"Point d'intersection: -40°C = -40°F\", -90, 80)");
+            }
+        };
+        
+        const applet = new GGBApplet(params, true);
+        window.addEventListener("load", function() {
+            applet.inject("ggb-element");
+        });
+
+        // Questions du quiz
+        const questions = [
+            {
+                question: "1) Quel est l'équivalent de 0°C en degrés Fahrenheit ?",
+                options: [
+                    "a) 0°F",
+                    "b) 32°F",
+                    "c) -32°F",
+                    "d) 16°F"
+                ],
+                correct: ["b"],
+                multiple: false
+            },
+            {
+                question: "2) Quel est l'équivalent de 0°F en degrés Celsius ?",
+                options: [
+                    "a) 0°C",
+                    "b) 32°C",
+                    "c) -160/9 °C",
+                    "d) -17°C"
+                ],
+                correct: ["c"],
+                multiple: false
+            },
+            {
+                question: "3) Quelle est la fonction permettant de passer des degrés Fahrenheit aux degrés Celsius ?",
+                options: [
+                    "a) g(x) = (5/9)*x - 32",
+                    "b) g(x) = 0,55x - 32",
+                    "c) g(x) = 0,55x - 18",
+                    "d) g(x) = (5/9)*x - 160/9"
+                ],
+                correct: ["d"],
+                multiple: false
+            },
+            {
+                question: "4) Existe-t-il une température qui soit la même en degrés Celsius et degrés Fahrenheit ?",
+                options: [
+                    "a) Oui",
+                    "b) Non"
+                ],
+                correct: ["a"],
+                multiple: false
+            },
+            {
+                question: "5) Que vaut -40°C en degrés Fahrenheit ?",
+                options: [
+                    "a) -8°F",
+                    "b) -72°F",
+                    "c) -40°F",
+                    "d) 8°F"
+                ],
+                correct: ["c"],
+                multiple: false
+            },
+            {
+                question: "6) Que vaut -40°F en degrés Celsius ?",
+                options: [
+                    "a) -8°C",
+                    "b) -72°C",
+                    "c) -40°C",
+                    "d) 8°C"
+                ],
+                correct: ["c"],
+                multiple: false
+            },
+            {
+                question: "7) Comment traduire la phrase : \"existe-t-il une température en degrés Celsius qui soit la même en degrés Fahrenheit ? \" en équation ? (plusieurs réponses possibles)",
+                options: [
+                    "a) 1,8*x + 32 = x",
+                    "b) (9/5)*x - 160/9 = x", 
+                    "c) (5/9)*x + 32 = x",
+                    "d) (5/9)*x - 160/9 = x"
+                ],
+                correct: ["a"],
+                multiple: true
+            },
+            {
+                question: "8) Comment résoudre la question : \"existe-t-il une température en degrés Celsius qui soit la même en degrés Fahrenheit ? \" graphiquement ? (plusieurs réponses possibles)",
+                options: [
+                    "a) Chercher l'intersection entre la représentation graphique de la fonction $x \\mapsto 1,8x + 32$ et la première diagonale $x \\mapsto x$",
+                    "b) Chercher l'intersection entre la représentation graphique de la fonction $x \\mapsto \\dfrac{5}{9}x - \\dfrac{160}{9}$ et la première diagonale $x \\mapsto x$",
+                    "c) Chercher l'intersection entre la représentation graphique de la fonction $x \\mapsto 1,8x + 32$ et la représentation graphique de la fonction $x \\mapsto \\dfrac{5}{9}x - \\dfrac{160}{9}$",
+                    "d) Chercher l'intersection entre la représentation graphique de la fonction $x \\mapsto 1,8x + 32$ et l'axe des abscisses"
+                ],
+                correct: ["a"],
+                multiple: true
+            },
+            {
+                question: "9) Existe-t-il un point de la droite affine représentant la fonction f(x) = 1,8x + 32 dont l'abscisse soit égale à l'ordonnée ?",
+                options: [
+                    "a) Oui",
+                    "b) Non"
+                ],
+                correct: ["a"],
+                multiple: false
+            },
+            {
+                question: "10) Que signifie qu'un point de la droite affine représentant la fonction f(x) = 1,8x + 32 ait la même abscisse que son ordonnée ? (plusieurs réponses possibles)",
+                options: [
+                    "a) Que ses coordonnées sont solutions de l'équation f(x) = x",
+                    "b) Que ses coordonnées sont solutions de l'équation 1,8x + 32 = x",
+                    "c) Que ses coordonnées ne sont pas solutions de l'équation f(x) = x",
+                    "d) Que ses coordonnées ne sont pas solutions de l'équation 1,8x + 32 = x"
+                ],
+                correct: ["a", "b"],
+                multiple: true
+            },
+            {
+                question: "11) Existe-t-il un point de la droite affine représentant la fonction $g(x) = \\dfrac{5}{9}x - \\dfrac{160}{9}$ dont l'abscisse soit égale à l'ordonnée ?",
+                options: [
+                    "a) Oui",
+                    "b) Non"
+                ],
+                correct: ["a"],
+                multiple: false
+            },
+            {
+                question: "12) Que signifie qu'un point de la droite affine représentant la fonction $g(x) = \\dfrac{5}{9}x - \\dfrac{160}{9}$ ait la même abscisse que son ordonnée ? (plusieurs réponses possibles)",
+                options: [
+                    "a) Que ses coordonnées sont solutions de l'équation g(x) = x",
+                    "b) Que ses coordonnées sont solutions de l'équation $\\dfrac{5}{9}x - \\dfrac{160}{9} = x$",
+                    "c) Que ses coordonnées ne sont pas solutions de l'équation g(x) = x",
+                    "d) Que ses coordonnées ne sont pas solutions de l'équation $\\dfrac{5}{9}x - \\dfrac{160}{9} = x$"
+                ],
+                correct: ["a", "b"],
+                multiple: true
+            },
+            {
+                question: "13) Par lecture graphique que peut-on observer ? (plusieurs réponses possibles)",
+                options: [
+                    "a) Que la droite représentative de la fonction f(x) = 1,8x + 32 augmente moins vite que celle de la fonction $g(x) = \\dfrac{5}{9}x - \\dfrac{160}{9}$",
+                    "b) Que les droites représentatives des fonctions f(x) = 1,8x + 32 et $g(x) = \\dfrac{5}{9}x - \\dfrac{160}{9}$ sont parallèles",
+                    "c) Que la droite représentative de la fonction f(x) = 1,8x + 32 augmente plus vite que celle de la fonction $g(x) = \\dfrac{5}{9}x - \\dfrac{160}{9}$",
+                    "d) Que les droites représentatives des fonctions f(x) = 1,8x + 32 et $g(x) = \\dfrac{5}{9}x - \\dfrac{160}{9}$ ne sont pas parallèles"
+                ],
+                correct: ["c", "d"],
+                multiple: true
+            },
+            {
+                question: "14) Si la température augmente d'1°C alors de combien augmente-t-elle en degré Fahrenheit ?",
+                options: [
+                    "a) 1°F",
+                    "b) 32°F",
+                    "c) 1,8°F",
+                    "d) ça dépend de la température initiale"
+                ],
+                correct: ["c"],
+                multiple: false
+            },
+            {
+                question: "15) Si la température augmente d'1°F alors de combien augmente-t-elle en degré Celsius ?",
+                options: [
+                    "a) 1°C",
+                    "b) $-\\dfrac{160}{9}°F$",
+                    "c) $\\dfrac{5}{9}°F$ (environ 0,56)",
+                    "d) ça dépend de la température initiale"
+                ],
+                correct: ["c"],
+                multiple: false
+            },
+            {
+                question: "16) En physique, le système international des unités a choisi le Kelvin pour mesurer les températures de façon absolue. Le zéro est la température la plus froide de l'univers et correspond à -273,15°C. Quelle est sa valeur en degrés Fahrenheit ? (plusieurs réponses possibles)",
+                options: [
+                    "a) -460°F",
+                    "b) -459,67°F",
+                    "c) $-273,15\\times 1,8 + 32 °F$",
+                    "d) -469,67°F"
+                ],
+                correct: ["b", "c"],
+                multiple: true
+            },
+            {
+                question: "17) La fonction permettant de calculer les Kelvin à partir des degrés Celsius est la suivante : k(x) = x + 273,15 où x désigne la température en degrés Celsius. Cette fonction est-elle affine ?",
+                options: [
+                    "a) Oui",
+                    "b) Non"
+                ],
+                correct: ["a"],
+                multiple: false
+            },
+            {
+                question: "18) Comment déterminer la fonction permettant de calculer les Kelvin à partir des degrés Fahrenheit ? (plusieurs réponses possibles)",
+                options: [
+                    "a) En multipliant par $\\dfrac{5}{9}$ puis en retranchant $\\dfrac{160}{9}$",
+                    "b) En remplaçant x par $g(x) = \\dfrac{5}{9}x - \\dfrac{160}{9}$ dans l'expression k(x) avec cette fois x qui désigne la température en degrés Fahrenheit",
+                    "c) À l'aide de la fonction $k_2(x) = \\dfrac{5}{9}x - \\dfrac{2298,35}{9}$ où x désigne la température en degrés Fahrenheit",
+                    "d) À l'aide de la fonction $k_3(x) = \\dfrac{9}{5}x + 305,15$"
+                ],
+                correct: ["a", "b", "c"],
+                multiple: true
+            },
+            {
+                question: "19) Quelle fonction permet d'exprimer les degrés Celsius en fonction des Kelvin ?",
+                options: [
+                    "a) c(x) = x - 273,15 où x désigne les Kelvin",
+                    "b) c(x) = 273,15x",
+                    "c) c(x) = 273,15 - x",
+                    "d) c(x) = x - 1/273,15"
+                ],
+                correct: ["a"],
+                multiple: false
+            },
+            {
+                question: "20) Quelle fonction permet d'exprimer les degrés Fahrenheit en fonction des Kelvin ? (plusieurs réponses possibles)",
+                options: [
+                    "a) $f_2(x) = \\dfrac{9}{5}x - 241,15$ où x désigne les Kelvin",
+                    "b) $f_2(x) = \\dfrac{9}{5}c(x) + 32$ où x désigne les Kelvin",
+                    "c) $f_2(x) = 1,8x - 459,67$ où x désigne les Kelvin",
+                    "d) $f_2(x) = 1,8x - 469,67$ où x désigne les Kelvin"
+                ],
+                correct: ["a", "b", "c"],
+                multiple: true
+            }
+        ];
+
+        // Génération des questions
+        function generateQuiz() {
+            const questionsContainer = document.getElementById("questions");
+            questions.forEach((q, index) => {
+                const questionDiv = document.createElement("div");
+                questionDiv.className = "question";
+                
+                const questionText = document.createElement("p");
+                questionText.innerHTML = q.question;
+                questionDiv.appendChild(questionText);
+                
+                const optionsDiv = document.createElement("div");
+                optionsDiv.className = "options";
+                
+                q.options.forEach((option, optionIndex) => {
+                    const optionDiv = document.createElement("div");
+                    optionDiv.className = "option";
+                    
+                    const input = document.createElement("input");
+                    if (q.multiple) {
+                        input.type = "checkbox";
+                    } else {
+                        input.type = "radio";
+                    }
+                    input.name = `question-${index}`;
+                    input.id = `q${index}-${optionIndex}`;
+                    input.value = option.charAt(0);
+                    
+                    const label = document.createElement("label");
+                    label.htmlFor = `q${index}-${optionIndex}`;
+                    label.innerHTML = option;
+                    
+                    optionDiv.appendChild(input);
+                    optionDiv.appendChild(label);
+                    optionsDiv.appendChild(optionDiv);
+                });
+                
+                questionDiv.appendChild(optionsDiv);
+                questionsContainer.appendChild(questionDiv);
+            });
+        }
+        
+        // Vérification des réponses
+        function checkAnswers() {
+            let score = 0;
+            const correctAnswersHTML = [];
+            correctAnswersHTML.push("<h3>Réponses correctes :</h3>");
+            
+            questions.forEach((q, index) => {
+                const selectedOptions = [];
+                const questionName = `question-${index}`;
+                const inputs = document.querySelectorAll(`input[name="${questionName}"]:checked`);
+                
+                inputs.forEach(input => {
+                    selectedOptions.push(input.value);
+                });
+                
+                // Vérifier si les réponses sont correctes
+                const isCorrect = q.correct.length === selectedOptions.length && 
+                                 q.correct.every(value => selectedOptions.includes(value));
+                
+                if (isCorrect) {
+                    score++;
+                }
+                
+                // Ajouter la réponse correcte à l'affichage
+                const correctAnswerText = q.correct.map(opt => {
+                    const optionIndex = q.options.findIndex(o => o.charAt(0) === opt);
+                    return q.options[optionIndex];
+                }).join(", ");
+                
+                correctAnswersHTML.push(`<p><strong>${q.question}</strong><br>Réponse(s) correcte(s) : ${correctAnswerText}</p>`);
+            });
+            
+            // Afficher le score
+            document.getElementById("score").textContent = score;
+            document.getElementById("result").innerHTML = `Vous avez obtenu ${score} sur ${questions.length} !`;
+            document.getElementById("result").classList.remove("hidden");
+            
+            // Afficher les réponses correctes
+            document.getElementById("correct-answers").innerHTML = correctAnswersHTML.join("");
+            document.getElementById("correct-answers").classList.remove("hidden");
+            
+            // Désactiver le bouton de soumission
+            document.getElementById("submit-btn").disabled = true;
+        }
+        
+        // Événements
+        document.addEventListener("DOMContentLoaded", function() {
+            generateQuiz();
+            document.getElementById("submit-btn").addEventListener("click", checkAnswers);
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        });
+    </script>
+</body>
+</html>
